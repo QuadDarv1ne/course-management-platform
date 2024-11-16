@@ -150,11 +150,23 @@ curl -X POST http://localhost:8000/webhook/payment/ -H "Content-Type: applicatio
 course-management-platform/
 │
 ├── app/
-│   ├── main.py               # Основное приложение
-│   ├── routes/               # Маршруты (REST API, Webhook, WebSocket)
-│   ├── grpc/                 # gRPC-сервис и клиент
-│   ├── websocket/            # WebSocket логика
-│   └── models/               # Модели базы данных
+│   ├── __init__.py           # Инициализация приложения
+│   ├── main.py               # Основное приложение FastAPI
+│   ├── grpc/                     # gRPC-сервис и клиент
+│   │   ├── server.py             # gRPC сервер
+│   │   ├── client.py             # gRPC клиент
+│   │   └── course.proto          # Определение gRPC сервиса
+│   │
+│   ├── routes/                   # Маршруты (REST API, Webhook, WebSocket)
+│   │   ├── course_routes.py      # Маршруты для работы с курсами (REST)
+│   │   ├── websocket_routes.py   # Маршруты для WebSocket
+│   │   └── webhook_routes.py     # Маршруты для Webhook
+│   │
+│   ├── models/                   # Модели базы данных
+│   │   └── course_model.py       # Модель курса для работы с базой данных
+│   │
+│   ├── websocket/                # Логика для WebSocket
+│   └── config.py                 # Конфигурация приложения            
 │
 ├── docker-compose.yml         # Конфигурация Docker
 ├── requirements.txt           # Зависимости проекта
